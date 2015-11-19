@@ -88,11 +88,39 @@ function toString(date) {
   return date.getFullYear() + '-' + MonthNumberToString[date.getMonth()].short + '-' + date.getDate();
 }
 
+function toMonthAndYearString(date) {
+  return MonthNumberToString[date.getMonth()].long + '-' + date.getFullYear();
+}
+
+function isSameDay(first, second) {
+  return first.getFullYear() === second.getFullYear() && first.getMonth() === second.getMonth() && first.getDate() === second.getDate();
+}
+
+function isBefore(first, second) {
+    return first.getTime() < second.getTime();
+}
+
+function isAfter(first, second) {
+    return first.getTime() > second.getTime();
+}
+
+function moveToDayOfWeek(date, dayOfWeek) {
+    while (date.getDay() !== dayOfWeek) {
+      date.setDate(date.getDate()-1);
+    }
+    return date;
+}
+
 const DateUtilities = {
   WeekNumberToString,
   MonthNumberToString,
   numberOfDaysInMonth,
-  toString
+  toString,
+  toMonthAndYearString,
+  isSameDay,
+  isBefore,
+  isAfter,
+  moveToDayOfWeek
 }
 
 export default DateUtilities;

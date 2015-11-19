@@ -10,15 +10,15 @@ import '../styles/style.css';
 class DatePicker extends Component {
 
   static defaultProps = {
-    selected: new Date(),
-    view: new Date()
   }
 
   static propTypes = {}
 
+  defaultDate = new Date();
+
   state = {
-    view: this.props.view,
-    selected: this.props.selected,
+    view: this.props.view || this.defaultDate,
+    selected: this.props.selected || this.defaultDate,
     minDate: null,
     maxDate: null,
     visible: false
