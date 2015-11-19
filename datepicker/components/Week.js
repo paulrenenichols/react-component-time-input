@@ -13,6 +13,7 @@ class Week extends Component {
         clone = new Date(start.getTime());
 
     for (var i = 1; i <= 6; i++) {
+        clone = new Date(clone.getTime());
         clone.setDate(clone.getDate()+1);
         days.push(clone);
     }

@@ -20,20 +20,16 @@ class Calendar extends Component {
   }
 
   onMove = (view, isForward) => {
-    //this.refs.weeks.moveTo(view, isForward);
+    this.refs.weeks.moveTo(view, isForward);
   }
 
-  onTransitionEnd = () => {
-    console.log('onTransitionEnd()');
-    this.refs.monthHeader.enable();
-  }
 
   render () {
     return (
       <div className={"calendar" + (this.props.visible ? " calendar-show" : " calendar-hide")}>
         <MonthHeader ref={"monthHeader"} view={this.props.view} onMove={this.onMove} />
         <WeekHeader />
-        <Weeks ref={"weeks"} view={this.props.view} selected={this.props.selected} onTransitionEnd={this.onTransitionEnd} onSelect={this.props.onSelect} minDate={this.props.minDate} maxDate={this.props.maxDate} />
+        <Weeks ref={"weeks"} view={this.props.view} selected={this.props.selected} onSelect={this.props.onSelect} minDate={this.props.minDate} maxDate={this.props.maxDate} />
       </div>
     );
   }

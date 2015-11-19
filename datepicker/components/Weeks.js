@@ -17,15 +17,6 @@ class Weeks extends Component {
     //ReactDOM.findDOMNode(this.refs.current).addEventListener("transitionend", this.onTransitionEnd);
   }
 
-  onTransitionEnd() {
-    this.setState({
-      sliding: null,
-      view: new Date(this.state.other.getTime())
-    });
-
-    this.props.onTransitionEnd();
-  }
-
   getWeekStartDates(view) {
     view.setDate(1);
     view = DateUtilities.moveToDayOfWeek(new Date(view.getTime()), 0);

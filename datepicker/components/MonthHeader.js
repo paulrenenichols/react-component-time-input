@@ -38,7 +38,6 @@ class MonthHeader extends Component {
 
     this.setState({
         view: view,
-        enabled: false
     });
 
     this.props.onMove(view, isForward);
