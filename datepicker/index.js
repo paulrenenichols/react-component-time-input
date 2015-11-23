@@ -1,6 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-import DatePicker from './components/datepicker';
+import DatePicker from './components/DatePicker';
+import DateUtilities from './utility/DateUtilities';
 
-export default DatePicker;
+const DateComponent = {
+  DatePicker,
+  DateUtilities
+}
+
+export default DateComponent;
