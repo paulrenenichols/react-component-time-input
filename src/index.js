@@ -1,11 +1,22 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { App } from './App';
+import App from './App';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import { combineReducers } from 'redux';
 import date from './dateReducer';
+import { dateUpdate } from './dateActions';
 
-const store = createStore(date);
+export const rootReducer = combineReducers({
+  date
+});
+
+
+const store = createStore(rootReducer);
+
+store.dispatch(dateUpdate(new Date()));
+
+window.store = store;
 
 render(
   <Provider store={store}>

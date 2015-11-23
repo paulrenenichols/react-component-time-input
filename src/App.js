@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 
-import DatePicker from '../datepicker/index';
+import { DatePicker, DateUtilities } from '../datepicker/index';
 
-export class App extends Component {
+function mapStateToProps(state) {
+  return {
+    date: state.date
+  };
+}
+
+class App extends Component {
+
   render() {
+    const { date } = this.props;
     return (
-      <DatePicker visible={true} selectedDate={new Date(1129, 11, 0)}/>
+      <div>
+        <input type={"text"} className={"date-picker-trigger"} value={DateUtilities.toYearMonthDateString(date)} readOnly></input>
+        <DatePicker visible={true} displayDate={date} selectedDate={date} />
+      </div>
     );
   }
 }
+
+export default connect(mapStateToProps)(App);
