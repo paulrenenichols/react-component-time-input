@@ -5,55 +5,27 @@ import DateUtilities from '../utility/DateUtilities';
 
 class MonthHeader extends Component {
 
-  static defaultProps = {
-  }
+  static defaultProps = {}
 
-  static propTypes = {}
-
-  state = {
-    view: new Date(this.props.view.getTime()),
-    enabled: true
+  static propTypes = {
+    displayDate: PropTypes.instanceOf(Date).isRequired
   }
 
   constructor(props) {
     super(props);
   }
 
-  moveBackward = () => {
-    var view = new Date(this.state.view.getTime());
-    view.setMonth(view.getMonth()-1);
-    this.move(view, false);
-  }
+  shouldComponentUpdate() {
 
-  moveForward = () => {
-    var view = new Date(this.state.view.getTime());;
-    view.setMonth(view.getMonth()+1);
-    this.move(view, true);
-  }
-
-  move = (view, isForward) => {
-    if (!this.state.enabled) {
-      return;
-    }
-
-    this.setState({
-        view: view,
-    });
-
-    this.props.onMove(view, isForward);
-  }
-
-  enable = () => {
-    this.setState({ enabled: true });
   }
 
   render () {
-    const { enabled } = this.state;
+    const { displayDate } = this.props;
     return (
       <div className={"month-header"}>
-        <i className={enabled ? "" : " disabled"} onClick={this.moveBackward}>{String.fromCharCode(9664)}</i>
-        <span>{DateUtilities.toMonthAndYearString(this.state.view)}</span>
-        <i className={enabled ? "" : " disabled"} onClick={this.moveForward}>{String.fromCharCode(9654)}</i>
+        <button className={""} >{String.fromCharCode(9664)}</button>
+        <h3>{DateUtilities.toMonthYearString(displayDate)}</h3>
+        <button className={""} >{String.fromCharCode(9654)}</button>
       </div>
     );
   }

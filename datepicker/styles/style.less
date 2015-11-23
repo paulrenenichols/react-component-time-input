@@ -43,7 +43,16 @@
     align-items: center;
   }
 
-  div.calendar div.month-header > i {
+  div.calendar div.month-header h3 {
+    display: inline-block;
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+  }
+
+  div.calendar div.month-header > button {
+    background-color: inherit;
+    border: none;
     font-weight: bold;
     padding: 5px 8px;
     border-radius: 3px;
@@ -52,7 +61,7 @@
     font-size:0.7em;
   }
 
-  div.calendar div.month-header > i:hover {
+  div.calendar div.month-header > button:hover {
     background-color: #026aa7;
     color: white;
   }
