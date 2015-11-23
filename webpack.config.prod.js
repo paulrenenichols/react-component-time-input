@@ -7,7 +7,7 @@ var webpack = require('webpack');
 require('es6-promise').polyfill();
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   entry: [
     './src/index'
   ],
