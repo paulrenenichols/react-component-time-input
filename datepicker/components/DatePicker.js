@@ -43,7 +43,7 @@ class DatePicker extends Component {
 
   render () {
     return (
-      <div className={"ardp-date-picker"}>
+      <section className={"date-picker"}>
         <Calendar {...this.state}/>
       </div>
     );
