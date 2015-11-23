@@ -41,6 +41,10 @@ class DatePicker extends Component {
 
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    return true;
+  }
+
   render () {
     return (
       <section className={"date-picker"}>
