@@ -80,47 +80,44 @@ const WeekNumberToString = {
   },
 }
 
-function numberOfDaysInMonth(year, month) {
+function countOfDaysInMonth(year, month) {
   return new Date(year, month + 1, 0).getDate();
 }
 
-function toString(date) {
+function toYearMonthDateString(date) {
   return date.getFullYear() + '-' + MonthNumberToString[date.getMonth()].short + '-' + date.getDate();
 }
 
-function toMonthAndYearString(date) {
+function toMonthYearString(date) {
   return MonthNumberToString[date.getMonth()].long + '-' + date.getFullYear();
 }
 
-function isSameDay(first, second) {
-  return first.getFullYear() === second.getFullYear() && first.getMonth() === second.getMonth() && first.getDate() === second.getDate();
+function compareDatesByFullTime(dateOne, dateTwo) {
+  return dateTwo.getTime() - dateOne.getTime();
 }
 
-function isBefore(first, second) {
-    return first.getTime() < second.getTime();
+function quantizeDateToDay(date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
-function isAfter(first, second) {
-    return first.getTime() > second.getTime();
+function quantizeDateToMonth(date) {
+  return new Date(date.getFullYear(), date.getMonth(), 1);
 }
 
-function moveToDayOfWeek(date, dayOfWeek) {
-    while (date.getDay() !== dayOfWeek) {
-      date.setDate(date.getDate()-1);
-    }
-    return date;
+function compareDatesByDay(dateOne, dateTwo) {
+  return compareDatesByDay(quantizeDateToDay(dateOne), quantizeDateToDay(dateTwo));
 }
 
 const DateUtilities = {
   WeekNumberToString,
   MonthNumberToString,
-  numberOfDaysInMonth,
-  toString,
-  toMonthAndYearString,
-  isSameDay,
-  isBefore,
-  isAfter,
-  moveToDayOfWeek
+  countOfDaysInMonth,
+  toYearMonthDateString,
+  toMonthYearString,
+  compareDatesByFullTime,
+  compareDatesByDay,
+  quantizeDateToDay,
+  quantizeDateToMonth
 }
 
 export default DateUtilities;
