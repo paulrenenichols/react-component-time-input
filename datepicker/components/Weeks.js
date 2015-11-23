@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Week       from './Week';
 
-import DateUtilities from '../utility/date';
+import DateUtilities from '../utility/DateUtilities';
 
 class Weeks extends Component {
 

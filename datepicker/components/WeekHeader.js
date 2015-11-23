@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-import DateUtilities from '../utility/date';
+import DateUtilities from '../utility/DateUtilities';
 
 class WeekHeader extends Component {
   render() {

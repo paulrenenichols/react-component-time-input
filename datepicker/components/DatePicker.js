@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Calendar from './Calendar';
 
-import DateUtilities from '../utility/date';
+import DateUtilities from '../utility/DateUtilities';
 
 import '../styles/style.css';
 

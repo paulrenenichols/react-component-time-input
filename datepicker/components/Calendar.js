@@ -5,7 +5,7 @@ import MonthHeader from './MonthHeader';
 import WeekHeader  from './WeekHeader';
 import Weeks       from './Weeks';
 
-import DateUtilities from '../utility/date';
+import DateUtilities from '../utility/DateUtilities';
 
 class Calendar extends Component {
 
