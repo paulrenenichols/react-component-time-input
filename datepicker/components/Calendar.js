@@ -19,22 +19,19 @@ class Calendar extends Component {
     super(props);
   }
 
-  onMove = (view, isForward) => {
-    this.refs.weeks.moveTo(view, isForward);
-  }
-
-
   render () {
+    const { displayDate, visible } = this.props;
     return (
-      <div className={"calendar" + (this.props.visible ? " calendar-show" : " calendar-hide")}>
-
+      <div className={"calendar" + (visible ? " calendar-show" : " calendar-hide")}>
+        <header>
+          <MonthHeader ref={"monthHeader"} displayDate={displayDate} />
+          <WeekHeader />
+        </header>
       </div>
     );
   }
 }
 
-// <MonthHeader ref={"monthHeader"} view={this.props.view} onMove={this.onMove} />
-// <WeekHeader />
 // <Weeks ref={"weeks"} view={this.props.view} selected={this.props.selected} onSelect={this.props.onSelect} minDate={this.props.minDate} maxDate={this.props.maxDate} />
 
 export default Calendar;
