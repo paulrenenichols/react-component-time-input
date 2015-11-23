@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 import DatePicker from '../datepicker/index';
 
-
 export class App extends Component {
   render() {
     return (
