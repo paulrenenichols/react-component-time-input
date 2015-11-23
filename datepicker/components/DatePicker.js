@@ -5,78 +5,45 @@ import Calendar from './Calendar';
 
 import DateUtilities from '../utility/DateUtilities';
 
-import '../styles/style.css';
+import '../styles/style.less';
 
 class DatePicker extends Component {
 
   static defaultProps = {
   }
 
-  static propTypes = {}
+  static propTypes = {
+    displayDate: PropTypes.instanceOf(Date).isRequired,
+    selectedDate: PropTypes.instanceOf(Date).isRequired,
+    visible: PropTypes.bool.isRequired,
+    minimumDate: PropTypes.instanceOf(Date),
+    maximumDate: PropTypes.instanceOf(Date)
+  }
 
   defaultDate = new Date();
 
   state = {
-    view: this.props.view || this.defaultDate,
-    selected: this.props.selected || this.defaultDate,
-    minDate: null,
-    maxDate: null,
-    visible: false
+    displayDate: DateUtilities.quantizeDateToMonth(this.props.displayDate),
+    selectedDate: DateUtilities.quantizeDateToDay(this.props.selectedDate),
+    minimumDate: this.props.minimumDate ? DateUtilities.quantizeDateToDay(this.props.minimumDate) : null,
+    maximumDate: this.props.maximumDate ? DateUtilities.quantizeDateToDay(this.props.maximumDate) : null,
+    visible: this.props.visible
   }
 
   constructor(props) {
     super(props);
   }
 
-  onClickOutsideHandler = (e) => {
-    if (this.state.visible && e.target.className !== "date-picker-trigger" && !this.parentsHaveClassName(e.target, "date-picker")) {
-
-      this.hide();
-    }
-  };
-
-  onSelect = (day) => {
-    this.setState({ selected: day });
-    this.hide();
-  }
-
-  show = () => {
-    console.log('DatePicker.show()');
-    this.setState({ visible: true });
-  }
-
-  hide = () => {
-    console.log('DatePicker.hide()');
-    this.setState({ visible: false });
-  }
-
-  parentsHaveClassName(element, className) {
-    var parent = element;
-    while (parent) {
-      if (parent.className && parent.className.indexOf(className) > -1) {
-        return true;
-      }
-
-      parent = parent.parentNode;
-    }
-  }
-
-  setMinDate = (date) => {
-    this.setState({ minDate: date });
-  }
-
-  setMaxDate = (date) => {
-    this.setState({ maxDate: date });
-  }
-
   componentDidMount() {
-    document.addEventListener("click", this.onClickOutsideHandler);
+  }
+
+  componentWillReceiveProps(nextProps) {
+
   }
 
   render () {
     return (
       <div className={"ardp-date-picker"}>
-        <input type={"text"} className={"date-picker-trigger"} value={DateUtilities.toString(this.state.selected)} onClick={this.show} readOnly></input>
         <Calendar {...this.state}/>
       </div>
     );
