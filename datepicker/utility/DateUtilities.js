@@ -80,8 +80,8 @@ const WeekNumberToString = {
   },
 }
 
-function countOfDaysInMonth(year, month) {
-  return new Date(year, month + 1, 0).getDate();
+function countOfDaysInMonth(date) {
+  return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 }
 
 function toYearMonthDateString(date) {
@@ -112,6 +112,50 @@ function cloneDate(date) {
   return new Date(date.getTime());
 }
 
+function addDaysToDate(date, days) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + days);
+}
+
+function addMonthsToDate(date, months) {
+  return new Date(date.getFullYear(), date.getMonth() + months, date.getDate());
+}
+
+function getFirstDayOfMonth(date) {
+  return new Date(date.getFullYear(), date.getMonth(), 1);
+}
+
+function getSundayBeforeOrOnFirstDayOfMonth(date) {
+  const firstDayOfMonth = getFirstDayOfMonth(date);
+  const dayOfWeekOfFirstDayOfMonth = firstDayOfMonth.getDay();
+  return addDaysToDate(firstDayOfMonth, -dayOfWeekOfFirstDayOfMonth);
+}
+
+function getSundaysInMonth(date) {
+  var sundays = [];
+  var sunday = getSundayBeforeOrOnFirstDayOfMonth(date);
+  const sundaysUpperLimit = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+  while (compareDatesByFullTime(sunday, sundaysUpperLimit) > 0) {
+    sundays.push(sunday);
+    sunday = addDaysToDate(sunday, 7);
+  }
+  return sundays;
+}
+
+function buildMonth(date) {
+  const daysInMonth = countOfDaysInMonth(date.getFullYear(), date.getMonth());
+  var sundays = getSundaysInMonth(date);
+  return sundays.map(function (currentSunday) {
+    var week = [];
+    var currentDay = cloneDate(currentSunday);
+    var nextSunday = addDaysToDate(currentSunday, 7);
+    while (compareDatesByFullTime(currentDay, nextSunday) > 0) {
+      week.push(currentDay);
+      currentDay = addDaysToDate(currentDay, 1);
+    }
+    return week;
+  });
+}
+
 const DateUtilities = {
   WeekNumberToString,
   MonthNumberToString,
@@ -122,7 +166,15 @@ const DateUtilities = {
   compareDatesByDay,
   quantizeDateToDay,
   quantizeDateToMonth,
-  cloneDate
+  cloneDate,
+  addDaysToDate,
+  addMonthsToDate,
+  getFirstDayOfMonth,
+  getSundayBeforeOrOnFirstDayOfMonth,
+  getSundaysInMonth,
+  buildMonth
 }
+
+window.DateUtilities = DateUtilities;
 
 export default DateUtilities;
