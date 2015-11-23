@@ -108,6 +108,10 @@ function compareDatesByDay(dateOne, dateTwo) {
   return compareDatesByDay(quantizeDateToDay(dateOne), quantizeDateToDay(dateTwo));
 }
 
+function cloneDate(date) {
+  return new Date(date.getTime());
+}
+
 const DateUtilities = {
   WeekNumberToString,
   MonthNumberToString,
@@ -117,7 +121,8 @@ const DateUtilities = {
   compareDatesByFullTime,
   compareDatesByDay,
   quantizeDateToDay,
-  quantizeDateToMonth
+  quantizeDateToMonth,
+  cloneDate
 }
 
 export default DateUtilities;
