@@ -45,7 +45,7 @@ class DatePicker extends Component {
     return (
       <section className={"date-picker"}>
         <Calendar {...this.state}/>
-      </div>
+      </section>
     );
   }
 }
