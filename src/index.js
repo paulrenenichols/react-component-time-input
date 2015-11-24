@@ -16,11 +16,13 @@ const store = createStore(rootReducer);
 
 store.dispatch(dateUpdate(new Date()));
 
+var updateSelectedDate = (date) => { store.dispatch(dateUpdate(date)) };
+
 window.store = store;
 
 render(
   <Provider store={store}>
-    <App />
+    <App selectedDateChange={updateSelectedDate}/>
   </Provider>,
   document.getElementById('root')
 );

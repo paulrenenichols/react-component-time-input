@@ -13,11 +13,11 @@ function mapStateToProps(state) {
 class App extends Component {
 
   render() {
-    const { date } = this.props;
+    const { date, selectedDateChange } = this.props;
     return (
       <div>
         <input type={"text"} className={"date-picker-trigger"} value={DateUtilities.toYearMonthDateString(date)} readOnly></input>
-        <DatePicker visible={true} displayDate={date} selectedDate={date} />
+        <DatePicker visible={true} displayDate={new Date()} selectedDate={date} selectedDateChange={selectedDateChange}/>
       </div>
     );
   }
