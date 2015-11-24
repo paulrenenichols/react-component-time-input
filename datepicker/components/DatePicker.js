@@ -5,8 +5,6 @@ import Calendar from './Calendar';
 
 import DateUtilities from '../utility/DateUtilities';
 
-import '../styles/style.less';
-
 class DatePicker extends Component {
 
   static defaultProps = {
