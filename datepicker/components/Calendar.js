@@ -18,7 +18,9 @@ class Calendar extends Component {
     visible: PropTypes.bool.isRequired,
     minimumDate: PropTypes.instanceOf(Date),
     maximumDate: PropTypes.instanceOf(Date),
-    calendarMonth: PropTypes.array.isRequired
+    calendarMonth: PropTypes.array.isRequired,
+    setSelectedDate: PropTypes.func.isRequired,
+    setDisplayDate: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -30,7 +32,7 @@ class Calendar extends Component {
     return (
       <div className={"calendar" + (visible ? " calendar-show" : " calendar-hide")}>
         <header>
-          <MonthHeader ref={"monthHeader"} displayDate={displayDate} />
+          <MonthHeader ref={"monthHeader"} {...this.props} />
           <WeekHeader />
         </header>
         <Weeks {...this.props} />
