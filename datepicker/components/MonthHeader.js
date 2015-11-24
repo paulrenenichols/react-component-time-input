@@ -8,24 +8,31 @@ class MonthHeader extends Component {
   static defaultProps = {}
 
   static propTypes = {
-    displayDate: PropTypes.instanceOf(Date).isRequired
+    displayDate: PropTypes.instanceOf(Date).isRequired,
+    setDisplayDate: PropTypes.func.isRequired
   }
 
   constructor(props) {
     super(props);
   }
 
-  shouldComponentUpdate() {
+  displayPreviousMonth = () => {
+    const { setDisplayDate, displayDate } = this.props;
+    setDisplayDate(DateUtilities.addMonthsToDate(displayDate, -1));
+  }
 
+  displayNextMonth = () => {
+    const { setDisplayDate, displayDate } = this.props;
+    setDisplayDate(DateUtilities.addMonthsToDate(displayDate, 1));
   }
 
   render () {
     const { displayDate } = this.props;
     return (
       <div className={"month-header"}>
-        <button className={""} >{String.fromCharCode(9664)}</button>
+        <button onClick={() => this.displayPreviousMonth()} className={""} >{String.fromCharCode(9664)}</button>
         <h3>{DateUtilities.toMonthYearString(displayDate)}</h3>
-        <button className={""} >{String.fromCharCode(9654)}</button>
+        <button onClick={() => this.displayNextMonth()} className={""} >{String.fromCharCode(9654)}</button>
       </div>
     );
   }
