@@ -27,7 +27,8 @@ class DatePicker extends Component {
     selectedDate: DateUtilities.quantizeDateToDay(this.props.selectedDate),
     minimumDate: this.props.minimumDate ? DateUtilities.quantizeDateToDay(this.props.minimumDate) : null,
     maximumDate: this.props.maximumDate ? DateUtilities.quantizeDateToDay(this.props.maximumDate) : null,
-    visible: this.props.visible
+    visible: this.props.visible,
+    calendarMonth: DateUtilities.buildMonth(this.props.displayDate)
   }
 
   constructor(props) {
