@@ -23,13 +23,13 @@ class Day extends Component {
   getDayClassName(day) {
     const { displayDate, selectedDate } = this.props;
     var className = "day";
-    if (DateUtilities.areSameDay(day, new Date())) {
+    if (DateUtilities.areSameYearMonthDay(day, new Date())) {
       className += " today";
     }
-    if (displayDate.getMonth() !== day.getMonth()) {
+    if (!DateUtilities.areSameYearMonth(displayDate, day)) {
       className += " other-month";
     }
-    if (this.props.selectedDate && DateUtilities.areSameDay(day, selectedDate)) {
+    if (this.props.selectedDate && DateUtilities.areSameYearMonthDay(day, selectedDate)) {
       className += " selected";
     }
     if (this.isDisabled(day)) {
