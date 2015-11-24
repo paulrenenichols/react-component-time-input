@@ -13,6 +13,12 @@ class Calendar extends Component {
   }
 
   static propTypes = {
+    displayDate: PropTypes.instanceOf(Date).isRequired,
+    selectedDate: PropTypes.instanceOf(Date).isRequired,
+    visible: PropTypes.bool.isRequired,
+    minimumDate: PropTypes.instanceOf(Date),
+    maximumDate: PropTypes.instanceOf(Date),
+    calendarMonth: PropTypes.array.isRequired
   }
 
   constructor(props) {
@@ -27,11 +33,11 @@ class Calendar extends Component {
           <MonthHeader ref={"monthHeader"} displayDate={displayDate} />
           <WeekHeader />
         </header>
+        <Weeks {...this.props} />
       </div>
     );
   }
 }
 
-// <Weeks ref={"weeks"} view={this.props.view} selected={this.props.selected} onSelect={this.props.onSelect} minDate={this.props.minDate} maxDate={this.props.maxDate} />
 
 export default Calendar;
