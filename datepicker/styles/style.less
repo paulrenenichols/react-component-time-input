@@ -59,11 +59,15 @@
     cursor: pointer;
     font-style:normal;
     font-size:0.7em;
-  }
 
-  div.calendar div.month-header > button:hover {
-    background-color: #026aa7;
-    color: white;
+    &:hover {
+      background-color: #026aa7;
+      color: white;
+    }
+
+    &:focus {
+      outline: none;
+    }
   }
 
   div.calendar div.week-header {
