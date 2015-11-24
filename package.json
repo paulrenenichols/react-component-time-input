@@ -1,5 +1,5 @@
 {
-  "name": "react-datepicker",
+  "name": "react-date-picker-component",
   "version": "0.9.0",
   "main": "datepicker/index.js",
   "description": "A datepicker component written in React.",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/paulrenenichols/react-datepicker.git"
+    "url": "https://github.com/paulrenenichols/react-date-picker-component.git"
   },
   "keywords": [
     "react",
@@ -30,9 +30,9 @@
   "author": "Paul Rene Nichols <paul.rene.nichols@gmail.com> (https://github.com/paulrenenichols)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/paulrenenichols/react-datepicker/issues"
+    "url": "https://github.com/paulrenenichols/react-date-picker-component/issues"
   },
-  "homepage": "https://github.com/paulrenenichols/react-datepicker",
+  "homepage": "https://github.com/paulrenenichols/react-date-picker-component",
   "devDependencies": {
     "babel-core": "^5.4.7",
     "babel-eslint": "^3.1.9",
