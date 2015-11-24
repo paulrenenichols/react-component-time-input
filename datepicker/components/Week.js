@@ -10,7 +10,8 @@ class Week extends Component {
   static propTypes = {
     week: PropTypes.array.isRequired,
     displayDate: PropTypes.instanceOf(Date).isRequired,
-    selectedDate: PropTypes.instanceOf(Date).isRequired
+    selectedDate: PropTypes.instanceOf(Date).isRequired,
+    setSelectedDate: PropTypes.func.isRequired
   }
 
   render() {

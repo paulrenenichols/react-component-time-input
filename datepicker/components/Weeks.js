@@ -13,7 +13,8 @@ class Weeks extends Component {
     visible: PropTypes.bool.isRequired,
     minimumDate: PropTypes.instanceOf(Date),
     maximumDate: PropTypes.instanceOf(Date),
-    calendarMonth: PropTypes.array.isRequired
+    calendarMonth: PropTypes.array.isRequired,
+    setSelectedDate: PropTypes.func.isRequired
   }
 
   constructor(props) {

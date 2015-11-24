@@ -10,7 +10,8 @@ class Day extends Component {
     displayDate: PropTypes.instanceOf(Date).isRequired,
     selectedDate: PropTypes.instanceOf(Date).isRequired,
     minimumDate: PropTypes.instanceOf(Date),
-    maximumDate: PropTypes.instanceOf(Date)
+    maximumDate: PropTypes.instanceOf(Date),
+    setSelectedDate: PropTypes.func.isRequired
   }
 
   isDisabled(day) {
@@ -37,10 +38,15 @@ class Day extends Component {
     return className;
   }
 
+  dayClickHandler = (e) => {
+    const { day, setSelectedDate } = this.props;
+    setSelectedDate(day);
+  }
+
   render() {
     const { day } = this.props;
     return (
-      <div className={this.getDayClassName(day)}>{day.getDate()}</div>
+      <div onClick={this.dayClickHandler} className={this.getDayClassName(day)}>{day.getDate()}</div>
     );
   }
 
