@@ -7,10 +7,11 @@ import { combineReducers } from 'redux';
 import date from './dateReducer';
 import { dateUpdate } from './dateActions';
 
+import '../datepicker/styles/DatePicker.less';
+
 export const rootReducer = combineReducers({
   date
 });
-
 
 const store = createStore(rootReducer);
 
