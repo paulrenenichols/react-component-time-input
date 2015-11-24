@@ -96,19 +96,27 @@ function compareDatesByFullTime(dateOne, dateTwo) {
   return dateTwo.getTime() - dateOne.getTime();
 }
 
-function compareDatesByDay(dateOne, dateTwo) {
-  return compareDatesByFullTime(quantizeDateToDay(dateOne), quantizeDateToDay(dateTwo));
+function compareDatesByYearMonthDay(dateOne, dateTwo) {
+  return compareDatesByFullTime(quantizeDateToYearMonthDay(dateOne), quantizeDateToYearMonthDay(dateTwo));
 }
 
-function areSameDay(dateOne, dateTwo) {
-  return DateUtilities.compareDatesByDay(dateOne, dateTwo) === 0;
+function compareDatesByYearMonth(dateOne, dateTwo) {
+  return compareDatesByFullTime(quantizeDateToYearMonth(dateOne), quantizeDateToYearMonth(dateTwo));
 }
 
-function quantizeDateToDay(date) {
+function areSameYearMonthDay(dateOne, dateTwo) {
+  return DateUtilities.compareDatesByYearMonthDay(dateOne, dateTwo) === 0;
+}
+
+function areSameYearMonth(dateOne, dateTwo) {
+  return DateUtilities.compareDatesByYearMonth(dateOne, dateTwo) === 0;
+}
+
+function quantizeDateToYearMonthDay(date) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
-function quantizeDateToMonth(date) {
+function quantizeDateToYearMonth(date) {
   return new Date(date.getFullYear(), date.getMonth(), 1);
 }
 
@@ -166,10 +174,12 @@ const DateUtilities = {
   toYearMonthDateString,
   toMonthYearString,
   compareDatesByFullTime,
-  compareDatesByDay,
-  areSameDay,
-  quantizeDateToDay,
-  quantizeDateToMonth,
+  compareDatesByYearMonthDay,
+  compareDatesByYearMonth,
+  areSameYearMonthDay,
+  areSameYearMonth,
+  quantizeDateToYearMonthDay,
+  quantizeDateToYearMonth,
   cloneDate,
   addDaysToDate,
   addMonthsToDate,

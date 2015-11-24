@@ -22,10 +22,10 @@ class DatePicker extends Component {
   defaultDate = new Date();
 
   state = {
-    displayDate: DateUtilities.quantizeDateToMonth(this.props.displayDate),
-    selectedDate: DateUtilities.quantizeDateToDay(this.props.selectedDate),
-    minimumDate: this.props.minimumDate ? DateUtilities.quantizeDateToDay(this.props.minimumDate) : null,
-    maximumDate: this.props.maximumDate ? DateUtilities.quantizeDateToDay(this.props.maximumDate) : null,
+    displayDate: DateUtilities.quantizeDateToYearMonth(this.props.displayDate),
+    selectedDate: DateUtilities.quantizeDateToYearMonthDay(this.props.selectedDate),
+    minimumDate: this.props.minimumDate ? DateUtilities.quantizeDateToYearMonthDay(this.props.minimumDate) : null,
+    maximumDate: this.props.maximumDate ? DateUtilities.quantizeDateToYearMonthDay(this.props.maximumDate) : null,
     visible: this.props.visible,
     calendarMonth: DateUtilities.buildMonth(this.props.displayDate)
   }
@@ -39,13 +39,18 @@ class DatePicker extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      displayDate: DateUtilities.quantizeDateToMonth(nextProps.displayDate),
-      selectedDate: DateUtilities.quantizeDateToDay(nextProps.selectedDate),
-      minimumDate: nextProps.minimumDate ? DateUtilities.quantizeDateToDay(nextProps.minimumDate) : null,
-      maximumDate: nextProps.maximumDate ? DateUtilities.quantizeDateToDay(nextProps.maximumDate) : null,
+      selectedDate: DateUtilities.quantizeDateToYearMonthDay(nextProps.selectedDate),
+      minimumDate: nextProps.minimumDate ? DateUtilities.quantizeDateToYearMonthDay(nextProps.minimumDate) : null,
+      maximumDate: nextProps.maximumDate ? DateUtilities.quantizeDateToYearMonthDay(nextProps.maximumDate) : null,
       visible: nextProps.visible,
-      calendarMonth: DateUtilities.buildMonth(nextProps.displayDate)
+      calendarMonth: DateUtilities.buildMonth(this.state.displayDate)
     });
+    if (!DateUtilities.areSameYearMonth(this.props.displayDate, nextProps.displayDate)) {
+      this.setState({
+        displayDate: nextProps.displayDate
+      });
+    }
+
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -55,14 +60,14 @@ class DatePicker extends Component {
   setSelectedDate = (nextSelectedDate) => {
     const { selectedDateChange } = this.props;
     this.setState({
-      selectedDate: DateUtilities.quantizeDateToDay(nextSelectedDate)
+      selectedDate: DateUtilities.quantizeDateToYearMonthDay(nextSelectedDate)
     });
     selectedDateChange(nextSelectedDate);
   }
 
   setDisplayDate = (nextDisplayDate) => {
     this.setState({
-      displayDate: DateUtilities.quantizeDateToMonth(nextDisplayDate),
+      displayDate: DateUtilities.quantizeDateToYearMonth(nextDisplayDate),
       calendarMonth: DateUtilities.buildMonth(nextDisplayDate)
     });
   }
