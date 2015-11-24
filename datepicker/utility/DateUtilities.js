@@ -96,16 +96,20 @@ function compareDatesByFullTime(dateOne, dateTwo) {
   return dateTwo.getTime() - dateOne.getTime();
 }
 
+function compareDatesByDay(dateOne, dateTwo) {
+  return compareDatesByFullTime(quantizeDateToDay(dateOne), quantizeDateToDay(dateTwo));
+}
+
+function areSameDay(dateOne, dateTwo) {
+  return DateUtilities.compareDatesByDay(dateOne, dateTwo) === 0;
+}
+
 function quantizeDateToDay(date) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
 function quantizeDateToMonth(date) {
   return new Date(date.getFullYear(), date.getMonth(), 1);
-}
-
-function compareDatesByDay(dateOne, dateTwo) {
-  return compareDatesByDay(quantizeDateToDay(dateOne), quantizeDateToDay(dateTwo));
 }
 
 function cloneDate(date) {
@@ -142,7 +146,6 @@ function getSundaysInMonth(date) {
 }
 
 function buildMonth(date) {
-  const daysInMonth = countOfDaysInMonth(date.getFullYear(), date.getMonth());
   var sundays = getSundaysInMonth(date);
   return sundays.map(function (currentSunday) {
     var week = [];
@@ -164,6 +167,7 @@ const DateUtilities = {
   toMonthYearString,
   compareDatesByFullTime,
   compareDatesByDay,
+  areSameDay,
   quantizeDateToDay,
   quantizeDateToMonth,
   cloneDate,
