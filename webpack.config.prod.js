@@ -18,7 +18,7 @@ module.exports = {
     filename: 'ReactDatePicker.js',
     publicPath: '/static/',
     library: 'ReactDatePicker',
-    libraryTarget: 'commonjs'
+    libraryTarget: 'umd'
   },
   externals: {
     'react': 'React',

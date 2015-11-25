@@ -1,6 +1,6 @@
 {
   "name": "react-component-date-picker",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "main": "dist/ReactDatePicker.js",
   "description": "A datepicker component written in React.",
   "scripts": {
