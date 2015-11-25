@@ -10,7 +10,7 @@ module.exports = {
   devtool: 'eval-source-map',
   entry: [
     'webpack-hot-middleware/client',
-    './src/index'
+    './devApp/index'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -25,7 +25,7 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loaders: ['babel'],
-      include: [path.join(__dirname, 'src'), path.join(__dirname, 'datepicker')],
+      include: [path.join(__dirname, 'devApp'), path.join(__dirname, 'datepicker')],
       exclude: /node_modules/
     },
     {
