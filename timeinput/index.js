@@ -1,12 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-import DatePicker from './components/DatePicker';
-import DateUtilities from './utility/DateUtilities';
+import TimeInput from './components/TimeInput';
 
-const ReactDatePicker = {
-  DatePicker,
-  DateUtilities
+const ReactTimeInput = {
+  TimeInput
 }
 
-export default ReactDatePicker;
+export default ReactTimeInput;
