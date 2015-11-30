@@ -1,7 +1,7 @@
-export const DATE_UPDATE = 'DATE_UPDATE';
-export function dateUpdate(date) {
+export const TIME_UPDATE = 'TIME_UPDATE';
+export function timeUpdate(time) {
     return {
-        type: DATE_UPDATE,
-        date
+        type: TIME_UPDATE,
+        time
     }
 }

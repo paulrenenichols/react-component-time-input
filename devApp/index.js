@@ -4,26 +4,29 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { combineReducers } from 'redux';
-import date from './dateReducer';
-import { dateUpdate } from './dateActions';
+import time from './timeReducer';
+import { timeUpdate } from './timeActions';
 
-import '../datepicker/styles/DatePicker.less';
+import '../timeinput/styles/TimeInput.less';
 
 export const rootReducer = combineReducers({
-  date
+  time
 });
 
 const store = createStore(rootReducer);
 
-store.dispatch(dateUpdate(new Date()));
+store.dispatch(dateUpdate({
+  hours: 0,
+  minutes: 0
+}));
 
-var updateSelectedDate = (date) => { store.dispatch(dateUpdate(date)) };
+var updateTime = (time) => { store.dispatch(timeUpdate(time)) };
 
 window.store = store;
 
 render(
   <Provider store={store}>
-    <App selectedDateChange={updateSelectedDate}/>
+    <App updateTime />
   </Provider>,
   document.getElementById('root')
 );

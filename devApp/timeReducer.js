@@ -1,9 +1,9 @@
-import { DATE_UPDATE } from './dateActions';
+import { TIME_UPDATE } from './timeActions';
 
-export default function date(state = new Date(), action = {}) {
+export default function time(state = {}, action = {}) {
   switch (action.type) {
-    case DATE_UPDATE:
-      return action.date;
+    case TIME_UPDATE:
+      return action.time;
     default:
       return state;
   }
