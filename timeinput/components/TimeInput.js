@@ -1,11 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-import Calendar from './Calendar';
-
-import DateUtilities from '../utility/DateUtilities';
-
-class DatePicker extends Component {
+class TimeInput extends Component {
 
   static defaultProps = {
   }
@@ -81,4 +77,4 @@ class DatePicker extends Component {
   }
 }
 
-export default DatePicker;
+export default TimeInput;
