@@ -1,5 +1,5 @@
 {
-  "name": "react-component-date-picker",
+  "name": "react-component-time-input",
   "version": "0.9.4",
   "main": "dist/index.js",
   "description": "A datepicker component written in React.",
@@ -9,11 +9,11 @@
     "build": "npm run clean && npm run build:webpack",
     "start": "node devServer.js",
     "lint": "eslint src",
-    "prepublish": "npm run clean && babel datepicker -d dist"
+    "prepublish": "npm run clean && babel timeinput -d dist"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/paulrenenichols/react-component-date-picker.git"
+    "url": "https://github.com/paulrenenichols/react-component-time-input.git"
   },
   "keywords": [
     "react",
@@ -31,9 +31,9 @@
   "author": "Paul Rene Nichols <paul.rene.nichols@gmail.com> (https://github.com/paulrenenichols)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/paulrenenichols/react-component-date-picker/issues"
+    "url": "https://github.com/paulrenenichols/react-component-time-input/issues"
   },
-  "homepage": "https://github.com/paulrenenichols/react-component-date-picker",
+  "homepage": "https://github.com/paulrenenichols/react-component-time-input",
   "devDependencies": {
     "babel": "^5.4.7",
     "babel-core": "^5.4.7",
