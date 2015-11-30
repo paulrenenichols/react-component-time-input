@@ -11,13 +11,13 @@ require('es6-promise').polyfill();
 module.exports = {
   devtool: 'eval',
   entry: [
-    './datepicker/index'
+    './timeinput/index'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'ReactDatePicker.js',
+    filename: 'ReactTimeInput.js',
     publicPath: '/static/',
-    library: 'ReactDatePicker',
+    library: 'ReactTimeInput',
     libraryTarget: 'umd'
   },
   externals: {
@@ -35,14 +35,13 @@ module.exports = {
       compressor: {
         warnings: false
       }
-    }),
-    new ExtractTextPlugin("ReactDatePicker.css")
+    })
   ],
   module: {
     loaders: [{
       test: /\.js$/,
       loaders: ['babel'],
-      include: [path.join(__dirname, 'datepicker')],
+      include: [path.join(__dirname, 'timeinput')],
       exclude: [/node_modules/, path.join(__dirname, 'src')]
     },
     {

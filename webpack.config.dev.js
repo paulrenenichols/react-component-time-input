@@ -25,7 +25,7 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loaders: ['babel'],
-      include: [path.join(__dirname, 'devApp'), path.join(__dirname, 'datepicker')],
+      include: [path.join(__dirname, 'devApp'), path.join(__dirname, 'timeinput')],
       exclude: /node_modules/
     },
     {
