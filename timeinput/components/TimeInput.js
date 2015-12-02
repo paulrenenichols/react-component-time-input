@@ -18,14 +18,7 @@ class TimeInput extends Component {
   state = {
     hours:   this.props.hours,
     minutes: this.props.minutes,
-    seconds: this.props.seconds,
-    timeInputChangeTimeoutID: null,
-    error: false,
-    value: TimeUtilities.formatTimeTwelveHour({
-      hours: this.props.hours,
-      minutes: this.props.minutes,
-      seconds: this.props.seconds
-    })
+    seconds: this.props.seconds
   }
 
   constructor(props) {
@@ -36,50 +29,31 @@ class TimeInput extends Component {
     return true;
   }
 
-  updateTimeInputValue = (timeString) => {
-    console.log('updateTimeInputValue(): this.state: ', this.state);
-    console.log('updateTimeInputValue(): timeString: ', timeString);
-    var timeObject = TimeUtilities.parseTime(timeString);
-    console.log('updateTimeInputValue(): timeObject: ', timeObject, ' !!timeObject ', !!timeObject);
-    if (timeObject) {
-      this.setState({
-        error: false,
-        timeInputChangeTimeoutID: null,
-        hours: timeObject.hours,
-        minutes: timeObject.minutes,
-        seconds: timeObject.seconds,
-        value: TimeUtilities.formatTimeTwelveHour({
-          hours: timeObject.hours,
-          minutes: timeObject.minutes,
-          seconds: timeObject.seconds
-        })
-      });
-    }
-    else {
-      console.log('updateTimeInputValue(): error: ', true);
-      this.setState({
-        error: true,
-        timeInputChangeTimeoutID: null
-      });
-    }
+  onHoursChange = (event) => {
+    console.log('hours ', event.target.value);
+    this.setState({ hours: event.target.value });
   }
 
-  onTimeInputChange = (event) => {
-    if (this.state.timeInputChangeTimeoutID) {
-      clearTimeout(this.state.timeInputChangeTimeoutID);
-    }
+  onMinutesChange = (event) => {
+    console.log('minutes ', event.target.value);
+    this.setState({ minutes: event.target.value });
+  }
 
-    var timeInputChangeTimeoutID = setTimeout(this.updateTimeInputValue, 1500, event.target.value);
-
-    this.setState({
-      timeInputChangeTimeoutID,
-      value: event.target.value
-    });
+  onSecondsChange = (event) => {
+    console.log('seconds ', event.target.value);
+    this.setState({ seconds: event.target.value });
   }
 
   render () {
+    const { hours, minutes, seconds } = this.state;
     return (
-      <input style={ { backgroundColor: (this.state.error) ? 'red' : ''} } type='text' onChange={this.onTimeInputChange} value={this.state.value}/>
+      <div className={'time-input'}>
+        <input type={'text'} value={hours}   maxLength={'2'} onChange={this.onHoursChange} />
+        <span>:</span>
+        <input type={'text'} value={minutes} maxLength={'2'} onChange={this.onMinutesChange} />
+        <span>:</span>
+        <input type={'text'} value={seconds} maxLength={'2'} onChange={this.onSecondsChange} />
+      </div>
     );
   }
 }
