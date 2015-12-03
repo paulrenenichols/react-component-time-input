@@ -1,0 +1,18 @@
+.time-input {
+  display: inline-block;
+  border: 1px solid black;
+  > .number-input {
+    font-size: 100%;
+    outline: none;
+    border: none;
+    width: 1.4em;
+    text-align: center;
+
+    &.invalid {
+      color: rgb(255, 0, 0, 0.5);
+    }
+  }
+  > span {
+    margin: 0;
+  }
+}

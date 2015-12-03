@@ -6,18 +6,21 @@ import { TimeInput } from '../timeinput/index';
 
 function mapStateToProps(state) {
   return {
-    time: state.time
+    hours: state.time.hours,
+    minutes: state.time.minutes,
+    seconds: state.time.seconds
   };
 }
 
 class App extends Component {
 
   render() {
-    const { date, selectedDateChange } = this.props;
     return (
       <div>
-        <input type={"text"} value={''} readOnly></input>
-        <TimeInput visible={true} />
+        <section id={'time-input'}>
+          <span>Time Input</span>
+          <TimeInput {...this.props}/>
+        </section>
       </div>
     );
   }

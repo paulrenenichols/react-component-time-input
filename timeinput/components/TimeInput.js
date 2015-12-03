@@ -1,87 +1,90 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-import TimeUtilities from '../utility/TimeUtilities';
+import TimeUtilities, { timeValueToTwoDigitString } from '../utility/TimeUtilities';
+
+import NumberInput from './NumberInput';
+
+function isValidAMPM(str) {
+  return !!str.match(/^([ap]m)$/ig);
+}
 
 class TimeInput extends Component {
 
   static defaultProps = {
-    hours: 0
+    hours:   0,
+    minutes: 0,
+    seconds: 0,
+    ampm: 'am',
+    useTwelveHourTime: false
   }
 
   static propTypes = {
     hours:   PropTypes.number.isRequired,
     minutes: PropTypes.number,
-    seconds: PropTypes.number
+    seconds: PropTypes.number,
+    ampm: PropTypes.string,
+    useTwelveHourTime: PropTypes.bool
   }
 
   state = {
     hours:   this.props.hours,
     minutes: this.props.minutes,
     seconds: this.props.seconds,
-    timeInputChangeTimeoutID: null,
-    error: false,
-    value: TimeUtilities.formatTimeTwelveHour({
-      hours: this.props.hours,
-      minutes: this.props.minutes,
-      seconds: this.props.seconds
-    })
+    ampm: this.props.ampm,
+    useTwelveHourTime: this.props.useTwelveHourTime
   }
 
   constructor(props) {
     super(props);
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    return true;
+  componentWillReceiveProps(nextProps) {
+  }
+  
+  onHoursChange = (hours) => {
+    console.log('onHoursChange hours ', hours);
+    this.setState({ hours });
   }
 
-  updateTimeInputValue = (timeString) => {
-    console.log('updateTimeInputValue(): this.state: ', this.state);
-    console.log('updateTimeInputValue(): timeString: ', timeString);
-    var timeObject = TimeUtilities.parseTime(timeString);
-    console.log('updateTimeInputValue(): timeObject: ', timeObject, ' !!timeObject ', !!timeObject);
-    if (timeObject) {
-      this.setState({
-        error: false,
-        timeInputChangeTimeoutID: null,
-        hours: timeObject.hours,
-        minutes: timeObject.minutes,
-        seconds: timeObject.seconds,
-        value: TimeUtilities.formatTimeTwelveHour({
-          hours: timeObject.hours,
-          minutes: timeObject.minutes,
-          seconds: timeObject.seconds
-        })
-      });
-    }
-    else {
-      console.log('updateTimeInputValue(): error: ', true);
-      this.setState({
-        error: true,
-        timeInputChangeTimeoutID: null
-      });
-    }
+  onMinutesChange = (minutes) => {
+    console.log('onMinutesChange minutes ', minutes);
+    this.setState({ minutes });
   }
 
-  onTimeInputChange = (event) => {
-    if (this.state.timeInputChangeTimeoutID) {
-      clearTimeout(this.state.timeInputChangeTimeoutID);
-    }
+  onSecondsChange = (seconds) => {
+    console.log('onSecondsChange seconds ', seconds);
+    this.setState({ seconds });
+  }
 
-    var timeInputChangeTimeoutID = setTimeout(this.updateTimeInputValue, 1500, event.target.value);
-
-    this.setState({
-      timeInputChangeTimeoutID,
-      value: event.target.value
-    });
+  onAMPMChange = (event) => {
+    console.log('onAMPMChange ampm ', event.target.value);
+    this.setState({ ampm: event.target.value });
   }
 
   render () {
+    const { hours, minutes, seconds, ampm, useTwelveHourTime } = this.state;
+
+    var ampmInput;
+    if (useTwelveHourTime) {
+      ampmInput = <input type={'text'} value={ampm} maxLength={'2'} onChange={this.onAMPMChange} />;
+    }
+
     return (
-      <input style={ { backgroundColor: (this.state.error) ? 'red' : ''} } type='text' onChange={this.onTimeInputChange} value={this.state.value}/>
+      <div className={'time-input'}>
+        <NumberInput enableZeroFill={true} value={hours} minValue={0} maxValue={23} maxLength={2} onChange={this.onHoursChange} />
+        <span>:</span>
+        <NumberInput enableZeroFill={true} value={minutes} minValue={0} maxValue={59} maxLength={2} onChange={this.onMinutesChange} />
+        <span>:</span>
+        <NumberInput enableZeroFill={true} value={seconds} minValue={0} maxValue={59} maxLength={2} onChange={this.onSecondsChange} />
+        {ampmInput}
+
+      </div>
     );
   }
 }
+
+
+
 
 export default TimeInput;

@@ -7,6 +7,7 @@ import { combineReducers } from 'redux';
 import time from './timeReducer';
 import { timeUpdate } from './timeActions';
 
+import './main.less';
 import '../timeinput/styles/TimeInput.less';
 
 export const rootReducer = combineReducers({
