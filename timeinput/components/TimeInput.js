@@ -1,61 +1,90 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-import TimeUtilities from '../utility/TimeUtilities';
+import TimeUtilities, { timeValueToTwoDigitString } from '../utility/TimeUtilities';
+
+import NumberInput from './NumberInput';
+
+function isValidAMPM(str) {
+  return !!str.match(/^([ap]m)$/ig);
+}
 
 class TimeInput extends Component {
 
   static defaultProps = {
-    hours: 0
+    hours:   0,
+    minutes: 0,
+    seconds: 0,
+    ampm: 'am',
+    useTwelveHourTime: false
   }
 
   static propTypes = {
     hours:   PropTypes.number.isRequired,
     minutes: PropTypes.number,
-    seconds: PropTypes.number
+    seconds: PropTypes.number,
+    ampm: PropTypes.string,
+    useTwelveHourTime: PropTypes.bool
   }
 
   state = {
     hours:   this.props.hours,
     minutes: this.props.minutes,
-    seconds: this.props.seconds
+    seconds: this.props.seconds,
+    ampm: this.props.ampm,
+    useTwelveHourTime: this.props.useTwelveHourTime
   }
 
   constructor(props) {
     super(props);
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    return true;
+  componentWillReceiveProps(nextProps) {
+  }
+  
+  onHoursChange = (hours) => {
+    console.log('onHoursChange hours ', hours);
+    this.setState({ hours });
   }
 
-  onHoursChange = (event) => {
-    console.log('hours ', event.target.value);
-    this.setState({ hours: event.target.value });
+  onMinutesChange = (minutes) => {
+    console.log('onMinutesChange minutes ', minutes);
+    this.setState({ minutes });
   }
 
-  onMinutesChange = (event) => {
-    console.log('minutes ', event.target.value);
-    this.setState({ minutes: event.target.value });
+  onSecondsChange = (seconds) => {
+    console.log('onSecondsChange seconds ', seconds);
+    this.setState({ seconds });
   }
 
-  onSecondsChange = (event) => {
-    console.log('seconds ', event.target.value);
-    this.setState({ seconds: event.target.value });
+  onAMPMChange = (event) => {
+    console.log('onAMPMChange ampm ', event.target.value);
+    this.setState({ ampm: event.target.value });
   }
 
   render () {
-    const { hours, minutes, seconds } = this.state;
+    const { hours, minutes, seconds, ampm, useTwelveHourTime } = this.state;
+
+    var ampmInput;
+    if (useTwelveHourTime) {
+      ampmInput = <input type={'text'} value={ampm} maxLength={'2'} onChange={this.onAMPMChange} />;
+    }
+
     return (
       <div className={'time-input'}>
-        <input type={'text'} value={hours}   maxLength={'2'} onChange={this.onHoursChange} />
+        <NumberInput enableZeroFill={true} value={hours} minValue={0} maxValue={23} maxLength={2} onChange={this.onHoursChange} />
         <span>:</span>
-        <input type={'text'} value={minutes} maxLength={'2'} onChange={this.onMinutesChange} />
+        <NumberInput enableZeroFill={true} value={minutes} minValue={0} maxValue={59} maxLength={2} onChange={this.onMinutesChange} />
         <span>:</span>
-        <input type={'text'} value={seconds} maxLength={'2'} onChange={this.onSecondsChange} />
+        <NumberInput enableZeroFill={true} value={seconds} minValue={0} maxValue={59} maxLength={2} onChange={this.onSecondsChange} />
+        {ampmInput}
+
       </div>
     );
   }
 }
+
+
+
 
 export default TimeInput;
