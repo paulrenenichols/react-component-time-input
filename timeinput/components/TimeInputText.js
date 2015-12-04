@@ -9,7 +9,7 @@ function isValidAMPM(str) {
   return !!str.match(/^([ap]m)$/ig);
 }
 
-class TimeInput extends Component {
+class TimeInputText extends Component {
 
   static defaultProps = {
     hours:   0,
@@ -41,7 +41,7 @@ class TimeInput extends Component {
 
   componentWillReceiveProps(nextProps) {
   }
-  
+
   onHoursChange = (hours) => {
     console.log('onHoursChange hours ', hours);
     this.setState({ hours });
@@ -71,14 +71,13 @@ class TimeInput extends Component {
     }
 
     return (
-      <div className={'time-input'}>
+      <div className={'time-input-text'}>
         <NumberInput enableZeroFill={true} value={hours} minValue={0} maxValue={23} maxLength={2} onChange={this.onHoursChange} />
         <span>:</span>
         <NumberInput enableZeroFill={true} value={minutes} minValue={0} maxValue={59} maxLength={2} onChange={this.onMinutesChange} />
         <span>:</span>
         <NumberInput enableZeroFill={true} value={seconds} minValue={0} maxValue={59} maxLength={2} onChange={this.onSecondsChange} />
         {ampmInput}
-
       </div>
     );
   }
@@ -87,4 +86,4 @@ class TimeInput extends Component {
 
 
 
-export default TimeInput;
+export default TimeInputText;

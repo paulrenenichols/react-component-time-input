@@ -17,8 +17,8 @@ export const rootReducer = combineReducers({
 const store = createStore(rootReducer);
 
 store.dispatch(timeUpdate({
-  hours: 0,
-  minutes: 0,
+  hours: 22,
+  minutes: 30,
   seconds: 0
 }));
 
