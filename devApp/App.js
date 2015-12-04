@@ -19,7 +19,7 @@ class App extends Component {
       <div>
         <section id={'time-input'}>
           <span>Time Input</span>
-          <TimeInput {...this.props}/>
+          <TimeInputText {...this.props}/>
         </section>
       </div>
     );
