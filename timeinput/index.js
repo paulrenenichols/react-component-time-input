@@ -1,11 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-import TimeInput     from './components/TimeInput';
-import TimeUtilities from './utility/TimeUtilities';
+import NumberInput      from './components/NumberInput';
+import TimeInputListBox from './components/TimeInputListBox';
+import TimeInputText    from './components/TimeInputText';
+import TimeUtilities    from './utility/TimeUtilities';
 
 const ReactTimeInput = {
-  TimeInput,
+  NumberInput,
+  TimeInputListBox,
+  TimeInputText,
   TimeUtilities
 }
 
