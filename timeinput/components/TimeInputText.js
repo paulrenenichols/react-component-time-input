@@ -71,14 +71,13 @@ class TimeInputText extends Component {
     }
 
     return (
-      <div className={'time-input'}>
+      <div className={'time-input-text'}>
         <NumberInput enableZeroFill={true} value={hours} minValue={0} maxValue={23} maxLength={2} onChange={this.onHoursChange} />
         <span>:</span>
         <NumberInput enableZeroFill={true} value={minutes} minValue={0} maxValue={59} maxLength={2} onChange={this.onMinutesChange} />
         <span>:</span>
         <NumberInput enableZeroFill={true} value={seconds} minValue={0} maxValue={59} maxLength={2} onChange={this.onSecondsChange} />
         {ampmInput}
-
       </div>
     );
   }
