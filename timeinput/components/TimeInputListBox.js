@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-import TimeUtilities, { timeValueToTwoDigitString } from '../utility/TimeUtilities';
+import TimeUtilities from '../utility/TimeUtilities';
 
 
 function isValidAMPM(str) {
@@ -28,23 +28,12 @@ class ListBoxItem extends Component{
 
   render24HourTime() {
     const { hours, minutes } = this.props;
-    let hoursString = (hours < 10) ? ('0' + hours) : '' + hours;
-    let minutesString = (minutes < 10) ? ('0' + minutes) : '' + minutes;
-
-    return hoursString + ':' + minutesString;
+    return TimeUtilities.twentyFourHourTimeString({ hours, minutes });
   }
 
   render12HourTime() {
     const { hours, minutes } = this.props;
-    let adjustedHours = (hours < 13) ? hours : hours - 12;
-    if (adjustedHours === 0) {
-      adjustedHours = 12;
-    }
-    let ampm = (hours < 12) ? 'am' : 'pm';
-    let hoursString = (hours < 10) ? ('0' + hours) : '' + hours;
-    let minutesString = (minutes < 10) ? ('0' + minutes) : '' + minutes;
-
-    return hoursString + ':' + minutesString + ' ' + ampm;
+    return TimeUtilities.twelveHourTimeString({ hours, minutes });
   }
 
   render() {
