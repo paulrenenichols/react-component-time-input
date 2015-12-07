@@ -15,6 +15,9 @@ function mapStateToProps(state) {
 class App extends Component {
 
   render() {
+    console.log('App this.props: ', this.props);
+    const { updateTime } = this.props;
+
     return (
       <div>
         <section id={'time-input-text'}>
@@ -23,7 +26,7 @@ class App extends Component {
         </section>
         <section id={'time-input-list-box'}>
           <div>ListBox Time Input</div>
-          <TimeInputListBox {...this.props}/>
+          <TimeInputListBox {...this.props} timeStep={5} onChange={updateTime} useTwelveHourTime/>
         </section>
       </div>
     );

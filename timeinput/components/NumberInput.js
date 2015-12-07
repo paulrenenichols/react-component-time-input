@@ -52,7 +52,7 @@ class NumberInput extends Component {
       maxValue: sanitizeIntegerInput(props.maxValue),
       maxLength: sanitizeIntegerInput(props.maxLength),
       enableZeroFill: props.enableZeroFill,
-      inputIsValid: this.isValid(props.value),
+      inputIsValid: this.isValid(props.value)
     }
   }
 
