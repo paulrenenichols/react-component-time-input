@@ -12,16 +12,13 @@ class ListBoxItem extends Component{
   static defaultProps = {
     hours:   0,
     minutes: 0,
-    ampm: 'am',
-    selected: false
+    selected: false,
+    useTwelveHourTime: false,
   }
 
   static propTypes = {
     hours:   PropTypes.number.isRequired,
-    minutes: PropTypes.number.isRequired,
-    ampm: PropTypes.string,
-    selected: PropTypes.bool,
-    onClick: PropTypes.func.isRequired
+    minutes: PropTypes.number.isRequired
   }
 
   onClick = (event) => {
@@ -29,14 +26,37 @@ class ListBoxItem extends Component{
     onClick(event.target, { hours, minutes });
   }
 
+  render24HourTime() {
+    const { hours, minutes } = this.props;
+    let hoursString = (hours < 10) ? ('0' + hours) : '' + hours;
+    let minutesString = (minutes < 10) ? ('0' + minutes) : '' + minutes;
+
+    return hoursString + ':' + minutesString;
+  }
+
+  render12HourTime() {
+    const { hours, minutes } = this.props;
+    let adjustedHours = (hours < 13) ? hours : hours - 12;
+    if (adjustedHours === 0) {
+      adjustedHours = 12;
+    }
+    let ampm = (hours < 12) ? 'am' : 'pm';
+    let hoursString = (hours < 10) ? ('0' + hours) : '' + hours;
+    let minutesString = (minutes < 10) ? ('0' + minutes) : '' + minutes;
+
+    return hoursString + ':' + minutesString + ' ' + ampm;
+  }
+
   render() {
-    const { selected, hours, minutes, onChange } = this.props;
+    const { selected, hours, minutes, useTwelveHourTime } = this.props;
+
+    let timeString = (useTwelveHourTime) ? this.render12HourTime() : this.render24HourTime();
     return <li
             role={'option'}
             className={ selected ? 'selected' : '' }
             onClick={this.onClick}
             >
-           {(hours < 10) ? ('0' + hours) : hours}:{(minutes < 10) ? ('0' + minutes) : minutes}
+           {timeString}
            </li>;
   }
 }
@@ -46,25 +66,21 @@ class TimeInputListBox extends Component {
   static defaultProps = {
     hours:   0,
     minutes: 0,
-    seconds: 0,
-    ampm: 'am',
-    useTwelveHourTime: false
+    useTwelveHourTime: false,
+    timeStep: 15
   }
 
   static propTypes = {
     hours:   PropTypes.number.isRequired,
     minutes: PropTypes.number,
-    seconds: PropTypes.number,
-    ampm: PropTypes.string,
-    useTwelveHourTime: PropTypes.bool
+    useTwelveHourTime: PropTypes.bool,
+    timeStep: PropTypes.number.isRequired,
+    onChange: PropTypes.func.isRequired
   }
 
   state = {
     hours:   this.props.hours,
-    minutes: this.props.minutes,
-    seconds: this.props.seconds,
-    ampm: this.props.ampm,
-    useTwelveHourTime: this.props.useTwelveHourTime
+    minutes: this.props.minutes
   }
 
   constructor(props) {
@@ -72,6 +88,7 @@ class TimeInputListBox extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    this.setState({ hours: nextProps.hours, minutes: nextProps.minutes });
   }
 
   componentDidMount() {
@@ -82,49 +99,29 @@ class TimeInputListBox extends Component {
     //ReactDOM.findDOMNode(this.refs.selected).scrollIntoView();
   }
 
-  onHoursChange = (hours) => {
-    console.log('onHoursChange hours ', hours);
-    this.setState({ hours });
-  }
-
-  onMinutesChange = (minutes) => {
-    console.log('onMinutesChange minutes ', minutes);
-    this.setState({ minutes });
-  }
-
-  onSecondsChange = (seconds) => {
-    console.log('onSecondsChange seconds ', seconds);
-    this.setState({ seconds });
-  }
-
-  onAMPMChange = (event) => {
-    console.log('onAMPMChange ampm ', event.target.value);
-    this.setState({ ampm: event.target.value });
-  }
-
   onTimeClick = (target, time) => {
     console.log(`clicked time: ${time.hours}:${time.minutes}`);
     this.setState(time);
+    this.props.onChange(time);
   }
 
-  render () {
-    const { hours, minutes, seconds, ampm, useTwelveHourTime } = this.state;
-
-    // var ampmInput;
-    // if (useTwelveHourTime) {
-    //   ampmInput = <input type={'text'} value={ampm} maxLength={'2'} onChange={this.onAMPMChange} />;
-    // }
-
-    var timeSlots = [];
+  renderTimeListBoxItems() {
+    const { timeStep, useTwelveHourTime, hours, minutes } = this.props;
+    var timeValues = [];
     for (let loopHours = 0; loopHours < 24; loopHours++) {
-      for (let loopMinutes = 0; loopMinutes < 60; loopMinutes += 15) {
+      for (let loopMinutes = 0; loopMinutes < 60; loopMinutes += timeStep) {
         let selected = false;
         if((hours === loopHours) && (minutes === loopMinutes)) {
           selected = true;
         }
-        timeSlots.push({hours: loopHours, minutes: loopMinutes, selected});
+        timeValues.push({hours: loopHours, minutes: loopMinutes, selected, useTwelveHourTime});
       }
     }
+
+    return  timeValues.map((time) => <ListBoxItem ref={time.selected ? 'selected' : ''} key={`${time.hours}:${time.minutes}`} {...time} onClick={this.onTimeClick}/> );
+  }
+
+  render () {
 
     return (
       <div className={'time-input-list-box'}>
@@ -132,7 +129,7 @@ class TimeInputListBox extends Component {
           <h3>Time Picker</h3>
         </header>
         <ol role={'listbox'}>
-          {timeSlots.map((time) => <ListBoxItem ref={time.selected ? 'selected' : ''} key={`${time.hours}:${time.minutes}`} {...time} onClick={this.onTimeClick}/> )}
+          {this.renderTimeListBoxItems()}
         </ol>
       </div>
     );

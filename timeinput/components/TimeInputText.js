@@ -40,6 +40,8 @@ class TimeInputText extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('TimeInputText componentWillReceiveProps, nextProps ', nextProps);
+    this.setState(nextProps);
   }
 
   onHoursChange = (hours) => {
