@@ -28,7 +28,7 @@ window.store = store;
 
 render(
   <Provider store={store}>
-    <App updateTime />
+    <App updateTime={updateTime} />
   </Provider>,
   document.getElementById('root')
 );
