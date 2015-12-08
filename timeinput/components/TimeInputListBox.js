@@ -113,14 +113,14 @@ class TimeInputListBox extends Component {
   render () {
 
     return (
-      <div className={'time-input-list-box'}>
+      <section className={'time-input-list-box'}>
         <header>
           <h3>Time Picker</h3>
         </header>
         <ol role={'listbox'}>
           {this.renderTimeListBoxItems()}
         </ol>
-      </div>
+      </section>
     );
   }
 }
