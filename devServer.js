@@ -17,11 +17,16 @@ app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(3000, 'localhost', function(err) {
+console.log('process.env.DEV_SERVER_PORT: ', process.env.DEV_SERVER_PORT);
+
+var portNumber = process.env.DEV_SERVER_PORT || 3000;
+
+app.listen(portNumber, 'localhost', function(err) {
   if (err) {
     console.log(err);
     return;
   }
 
-  console.log('Listening at http://localhost:3000');
+  console.log('react-component-time-input devServer');
+  console.log('listening at http://localhost:' + portNumber);
 });
